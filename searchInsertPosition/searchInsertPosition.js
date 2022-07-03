@@ -14,3 +14,5 @@ const searchInsert = (nums, target) => {
   }
   return nums.length;
 };
+
+
