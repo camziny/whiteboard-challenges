@@ -21,16 +21,3 @@ function printLinkedList(head) {
         node = node.next
     }
 }
-
-function main() {
-    const llistCount = parseInt(readLine(), 10);
-
-    let llist = new SinglyLinkedList();
-
-    for (let i = 0; i < llistCount; i++) {
-        const llistItem = parseInt(readLine(), 10);
-        llist.insertNode(llistItem);
-    }
-
-    printLinkedList(llist.head);
-}
