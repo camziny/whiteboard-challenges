@@ -102,3 +102,14 @@ Object.entries(objectTwo).forEach((value) => {
 ['foo', 'bar']
 ['hello', 'world']
 */
+
+Object.freeze(objectTwo);
+objectTwo.foo = "foo";
+console.log(objectTwo.foo);
+// "bar"
+
+objectTwo.toString = function () {
+  return "Hello world";
+};
+console.log(objectTwo.toString());
+// "Hello world"
