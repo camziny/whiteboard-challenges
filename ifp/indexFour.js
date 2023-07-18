@@ -57,4 +57,72 @@ class PowerArray extends Array {
   }
 }
 
-const names = new PowerArray(console.log, "Tim", "Dom", "Kim");
+const names = new PowerArray("Tim", "Dom", "Kim");
+
+// Convert normal function to arrow function
+
+function sum(a, b) {
+  return a + b;
+}
+
+const arrowSum = (a, b) => a + b;
+
+function isPositive(number) {
+  return number >= 0;
+}
+
+const arrowIsPositive = (number) => number >= 0;
+
+function randomNumber() {
+  return Math.random;
+}
+
+const arrowRandomNumber = () => Math.random;
+
+document.addEventListener("click", function () {
+  console.log("click");
+});
+
+document.addEventListener("click", () => {
+  console.log("click");
+});
+
+class PersonTwo {
+  constructor(name) {
+    this.name = name;
+  }
+
+  arrowPrintName() {
+    setTimeout(() => {
+      console.log("Arrow: " + this.name);
+    }, 100);
+  }
+
+  printNameFunction() {
+    setTimeout(function () {
+      console.log("Function: " + this.name);
+    }, 100);
+  }
+}
+
+let person = new PersonTwo("bob");
+console.log("this: " + this.name);
+person.printNameFunction();
+person.arrowPrintName();
+
+// Promises
+
+let p = new Promise((resolve, reject) => {
+  let a = 1 + 1;
+  if (a == 2) {
+    resolve("Success");
+  } else {
+    reject("Failed");
+  }
+});
+
+p.then((message) => {
+  console.log("This is in the then " + message);
+}).catch((message) => {
+  console.log("This is in the catch " + message);
+});
