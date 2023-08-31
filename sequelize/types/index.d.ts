@@ -1,14 +1,12 @@
 // types/index.d.ts
 
 export interface IUser {
-  first_name: string;
-  last_name?: string;
-  user_name?: string;
-  occupation?: string;
-  password?: string;
-  email?: string;
-  location?: string;
-  profile_image?: string;
+  email: string;
+  name: string;
+  password: string;
+  occupation: string;
+  role: string;
+  profile_image: string;
 }
 
 export interface IPost {
@@ -27,7 +25,7 @@ export interface IPointOfInterest {
   latitude?: number;
   price?: number;
   city?: string;
-  categories?: string;
+  category?: string;
   website?: string;
   postal_code?: string;
   province?: string;
