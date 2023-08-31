@@ -1,22 +1,34 @@
-// models/user.ts
+import { sequelize } from "../../config/db";
+import { DataTypes, Model } from "sequelize";
+import { PointOfInterest } from "./PointOfInterest";
+import { Post } from "./Post";
+import { IUser } from "../../types"; // Adjust the path
 
-import { sequelize } from "../config/database";
-import { DataTypes } from "sequelize";
+interface UserInstance extends Model<IUser>, IUser {}
 
-const User = sequelize.define(
+const User = sequelize.define<UserInstance>(
   "User",
   {
+    first_name: {
+      type: DataTypes.STRING,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+    },
     user_name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     occupation: {
       type: DataTypes.STRING,
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     location: {
       type: DataTypes.STRING,
@@ -29,5 +41,12 @@ const User = sequelize.define(
     timestamps: true,
   }
 );
+
+User.hasMany(Post);
+User.hasMany(PointOfInterest);
+
+User.sync().then(() => {
+  console.log("User Model synced");
+});
 
 export { User };

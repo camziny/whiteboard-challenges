@@ -1,37 +1,27 @@
-// models/post.ts
+import { sequelize } from "../../config/db";
+import { DataTypes, Model } from "sequelize";
+import { User } from "./User";
+import { PointOfInterest } from "./PointOfInterest";
+import { IPost } from "../../types";
 
-import { sequelize } from "../config/database";
-import { DataTypes } from "sequelize";
+interface PostInstance extends Model<IPost>, IPost {}
 
-const Post = sequelize.define(
+const Post = sequelize.define<PostInstance>(
   "Post",
   {
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    poi_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     rating: {
       type: DataTypes.DECIMAL,
     },
     comments: {
       type: DataTypes.TEXT,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
   },
-  {}
+  {
+    timestamps: true,
+  }
 );
+
+Post.belongsTo(User);
+Post.belongsTo(PointOfInterest);
 
 export { Post };
