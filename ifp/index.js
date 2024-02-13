@@ -1,112 +1,65 @@
-// let interestRate = 0.3;
-// interestRate = 1;
-// console.log(interestRate);
-
-// let firstName = "John";
-// const lastName = "Smith";
-
-// let name = "John"; //String Literal
-// let age = 20; // Number Literal
-// let isApproved = true; // Boolean Literal
-// let color = null; // Explicitly clear the value of the variable
-// let selectedColor = "red";
-// const person = undefined;
-
-// console.log(typeof person);
-// console.log(typeof color);
-
-// const foo = Symbol("foo");
-// console.log(foo);
-// // Objects
-
-// // create a person object
-
-// const personObject = {
-//   name: "Tim",
-//   age: 30,
-// };
-
-// // Dot Notation
-// personObject.name = "Tim";
-// console.log(personObject.name);
-
-// // Bracket Notation
-// personObject["name"] = "Mary";
-// console.log(personObject.name);
-
-// let selection = "name";
-// personObject[selection] = "Ed";
-
-// let personAge = "age";
-// personObject[personAge] = 20;
-// console.log(typeof personObject.age);
-
-// // Arrays
-
-// let selectedColors = ["red", "blue", "green"];
-// console.log(selectedColors);
-// console.log(selectedColors[0]);
-// selectedColors[2] = "orange";
-// selectedColors[2] = 1;
-// console.log(selectedColors);
-// console.log(typeof selectedColors);
-
-// // Functions
-
-// const greet = () => {
-//   console.log("hello world");
-// };
-
-// const greetPerson = (name) => {
-//   console.log("hello " + name);
-// };
-
-// greetPerson("John"); // John is the argument
-// greetPerson("Mary"); // Mary is the argument
-
-// greetTwoPeople("John", "Mary");
-
-// // Calculate a value
-// const square = (number) => {
-//   return number * number;
-// };
-
-// square(2);
-
-// let number = square(2);
-// console.log(number);
-// const array = [1, 2, 3, 4];
-// let even = true;
-
-// const greetTwoPeople = (personOne, personTwo) => {
-//   console.log("hello " + personOne + " and " + personTwo);
-// };
-
-// const isEven = (num) => {
-//   if (num % 2 === 0) {
-//     console.log("num is even");
-//   } else {
-//     if (num % 2 !== 0) {
-//       console.log("num is odd");
-//     }
-//   }
-// };
-
-let baseSalary = 30000;
-let overtime = 10;
-let rate = 20;
-
-const getWage = (baseSalary, overtime, rate) => {
-  return baseSalary + overtime * rate;
-};
-
-let employee = {
-  baseSalary: 30000,
-  overtime: 10,
-  rate: 20,
-  getWage: function () {
-    return this.baseSalary + this.overtime * this.rate;
+const quizzes = [
+  {
+    title: "Sample Quiz 1",
+    description: "This is the first sample quiz",
+    num_of_questions: 2,
+    scenarioId: 1,
+    questions: [
+      {
+        title: "Question 1 Title",
+        answerOne: "Answer 1.1",
+        answerTwo: "Answer 1.2",
+        answerThree: "Answer 1.3",
+        answerFour: "Answer 1.4",
+        quiz_Id: 1,
+      },
+      {
+        title: "Question 2 Title",
+        answerOne: "Answer 2.1",
+        answerTwo: "Answer 2.2",
+        answerThree: "Answer 2.3",
+        answerFour: "Answer 2.4",
+        quiz_Id: 1,
+      },
+    ],
   },
-};
+];
 
-employee.getWage();
+document.addEventListener("DOMContentLoaded", () => {
+  const quizContainer = document.getElementById("quiz-container");
+  let currentQuizIndex = 0;
+  let currentQuestionIndex = 0;
+
+  function showQuestion(quizIndex, questionIndex) {
+    const quiz = quizzes[quizIndex];
+    const question = quiz.questions[questionIndex];
+
+    quizContainer.innerHTML = `
+      <h1>${quiz.title}</h1>
+      <p>${quiz.description}</p>
+      <div class="question-container">
+        <h3>${question.title}</h3>
+        <ul>
+          <li>${question.answerOne}</li>
+          <li>${question.answerTwo}</li>
+          <li>${question.answerThree}</li>
+          <li>${question.answerFour}</li>
+        </ul>
+        ${
+          questionIndex < quiz.questions.length - 1
+            ? '<button onclick="showNextQuestion()">Next</button>'
+            : ""
+        }
+      </div>
+    `;
+  }
+
+  window.showNextQuestion = function () {
+    if (currentQuestionIndex < quizzes[currentQuizIndex].questions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion(currentQuizIndex, currentQuestionIndex);
+    }
+  };
+
+  showQuestion(currentQuizIndex, currentQuestionIndex);
+});

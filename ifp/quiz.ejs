@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Page</title>
+  </head>
+  <body>
+    <div id="quiz-container">
+      <% quizzes.forEach(quiz => { %>
+      <div class="quiz">
+        <h1><%= quiz.title %></h1>
+        <p><%= quiz.description %></p>
+        <% quiz.questions.forEach((question, index) => { %>
+        <div
+          class="question"
+          style="<%= index === 0 ? '' : 'display:none;' %>"
+          id="question-<%= quiz.scenarioId %>-<%= index %>"
+        >
+          <h3><%= question.title %></h3>
+          <ul>
+            <li><%= question.answerOne %></li>
+            <li><%= question.answerTwo %></li>
+            <li><%= question.answerThree %></li>
+            <li><%= question.answerFour %></li>
+          </ul>
+        </div>
+        <% }) %>
+        <button onclick="showNextQuestion(<%= quiz.scenarioId %>)">Next</button>
+      </div>
+      <% }) %>
+    </div>
+
+    <script>
+      let currentQuestionIndex = 0;
+      function showNextQuestion(quizId) {
+        let currentQuestion = document.getElementById(
+          `question-${quizId}-${currentQuestIndex}`
+        );
+        let nextQuestion = document.getElementById(
+          `question-${quizId}-${currentQuestIndex + 1}`
+        );
+
+        if (currentQuestion && nextQuestion) {
+          currentQuestion.style.display = "none";
+          nextQuestion.style.display = "block";
+          currentQuestionIndex++;
+        }
+      }
+    </script>
+  </body>
+</html>
