@@ -1,0 +1,18 @@
+.row {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.column {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.column:last-child {
+  margin-right: 0;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+}
